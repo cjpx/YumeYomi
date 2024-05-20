@@ -1,6 +1,3 @@
-### Repository Name:
-**YumeYomi**
-
 ### Description:
 Welcome to YumeYomi, our Japanese learning web application powered by Django! Inspired by JapanDict and utilizing information from Wikipedia under the Creative Commons Attribution-ShareAlike License 4.0, YumeYomi offers an immersive platform for learning Japanese language and culture while exploring the capabilities of the Django framework.
 
