@@ -1,0 +1,160 @@
+{% extends "learn/base.html" %}
+{% block content %}
+  <div class="xwrapper-body">
+      <div class="xmain-head">
+        <div class="xrow">
+          <div id="col-lx">
+            <div class="xhead-content">
+              <h1>{{ title }}</h1>
+              <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M5 21h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2zm2-10h4V7h2v4h4v2h-4v4h-2v-4H7v-2z"></path>
+                </svg> ADD TO LIST
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24">
+                  <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
+                </svg>
+
+              </button>
+            </div>
+            <div class="tag-container">
+              <span class="tag bg-bright purple">popular</span>
+              <span class="tag bg-gray">noun</span>
+              <span class=" tag bg-light-brown">usualy writting in kana alone</span>
+              <span class="tag bg-pink-purple">JPLT N2</span>
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                  <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                  <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043z"/>
+                </svg>Tags
+              </button>
+            </div>
+          </div>
+          <div class="base-col">
+            <p>Other Forms: 
+              <button style="border: none; cursor: pointer; margin: 10px 4px 0 4px;  border-radius: 4px; font-size: 2em; width: auto; height: auto; padding: 0; background: none;"><a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; ">片仮名</a></button>
+              <button style="border: none; cursor: pointer; margin: 10px 4px 0 0px;  border-radius: 4px; font-size: 2em; width: auto; height: auto; padding: 0; background: none;"><a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; ">{{title}}</a></button>
+            </p>
+          </div>
+          <div class="reading display-kana">
+            <h2>Reading
+              <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                 </svg>
+                </a>
+            </h2>
+            <div class="card-display">
+              <h3><span>{{title}}</span></h3>
+              <div class="play-kana">
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
+                  </svg>                
+                </button>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-wrapper">
+        <div class="text-description">
+          <p>
+              Hiragana is one of the three scripts used in the Japanese writing system, alongside katakana and kanji. It's a syllabary consisting of characters that represent syllables, making it the basic phonetic script in Japanese. Hiragana is often used for native Japanese words, grammatical elements, and verb endings. It's characterized by curved lines and is typically the first script Japanese children learn when they start studying the language.
+            <a href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer">(ChatGPT)</a>
+          </p>
+        </div>
+        {% block table %}
+          <table>
+            <h2>Monographs (gojūon)</h2>
+            <tbody>
+              {% for key, val in hiragana_table.items %}
+                {% if forloop.counter0|divisibleby:"5" %}
+                  <tr>
+                {% endif %}
+                <td>
+                  {% if val %}
+                    <div class="display-kana">
+                      <button class="play-kana">
+                        <span lang="jp">{{ key }}</span>
+                      </button>
+                    </div>
+                    <div class="display-romanji">
+                      <p>{{ val }}</p>
+                    </div>
+                  {% else %}
+                    <div class="space"></div> <!-- Spacer -->
+                  {% endif %}
+                </td>
+                {% if forloop.counter|divisibleby:"5" or forloop.last %}
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endblock table %}
+
+        {% block diacritics %}
+          <table>
+            <h2>Diacritics (gojūon with dakuten)</h2>
+            <tbody>
+              {% for key, val in diacritics_table.items %}
+                {% if forloop.counter0|divisibleby:"5" %}
+                  <tr>
+                {% endif %}
+                <td>
+                  {% if val %}
+                    <div class="display-kana">
+                      <button class="play-kana">
+                        <span lang="jp">{{ key }}</span>
+                      </button>
+                    </div>
+                    <div class="display-romanji">
+                      <p>{{ val }}</p>
+                    </div>
+                  {% else %}
+                    <div class="space"></div> <!-- Spacer -->
+                  {% endif %}
+                </td>
+                {% if forloop.counter|divisibleby:"5" or forloop.last %}
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endblock diacritics %}
+
+        {% block digraphs %}
+          <table>
+            <h2>Digraphs (yōon)</h2>
+            <tbody>
+              {% for key, val in digraphs_table.items %}
+                {% if forloop.counter0|divisibleby:"5" %}
+                  <tr>
+                {% endif %}
+                <td>
+                  {% if val %}
+                    <div class="display-kana">
+                      <button class="play-kana">
+                        <span lang="jp">{{ key }}</span>
+                      </button>
+                    </div>
+                    <div class="display-romanji">
+                      <p>{{ val }}</p>
+                    </div>
+                  {% else %}
+                    <div class="space"></div> <!-- Spacer -->
+                  {% endif %}
+                </td>
+                {% if forloop.counter|divisibleby:"5" or forloop.last %}
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endblock digraphs %}
+      </div>
+  </div>    
+
+  {% endblock content %}

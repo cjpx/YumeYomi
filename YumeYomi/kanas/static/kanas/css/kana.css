@@ -1,0 +1,282 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Zen+Maru+Gothic:wght@500&display=swap');
+
+
+/*========== VARIABLES CSS ==========*/
+:root {
+  --header-height: 3.5rem;
+  --nav-width: 219px;
+
+  /*========== Colors ==========*/
+  --first-color: #6923D0;
+  --first-color-light: #F4F0FA;
+  --title-color: #19181B;
+  --text-color: #58555E;
+  --text-color-light: #A5A1AA;
+  --body-color: #F9F6FD;
+  --container-color: #FFFFFF;
+  --tag-one-color: #A855F7;
+  --tag-two-color: #808080;
+  --tag-three-color: #C47878;
+  --tag-four-color: #EB03FF;
+
+  /*========== Font and typography ==========*/
+  --body-font: 'Poppins', sans-serif;
+  --normal-font-size: 1rem;
+  --small-font-size: .75rem;
+  --smaller-font-size: .75rem;
+
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+}
+
+/* ==========  styling main head elements  ============ */
+.xmain-head {
+  width: 80%;
+  align-items: center;
+}
+.xmain-head .xrow #col-lx h1{
+  font-size: 4em;
+  padding: 20px 0 0 0;
+}
+.xhead-content{
+  align-items: center;
+  display: flex;
+}
+.xhead-content h1{
+  margin-right: 5%;
+}
+.xhead-content button{
+  display: flex;
+  border: none;
+  color: #A855f7;
+  font-size: 0.75em;
+  margin: 6% 0 0 0;
+  background: none;
+  font-weight: 500;
+}
+
+.xhead-content button:hover{
+  background: #A855f740;
+  border-radius: 4px;
+  cursor: pointer;
+  
+  
+}
+.xhead-content button svg{
+  width: 30px;
+  height: 20px;
+  fill: #A855f7;
+  align-items: center;
+  font-size: 16px;
+  margin: 0 0 0 0;
+  padding: 0;
+}
+
+
+.col-lx button {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  width: auto; 
+  height: auto; 
+  align-items: center;
+  display: flex;
+  background: none;
+  border: none;
+}
+
+.col-lx button svg {
+  margin-right: 5px;
+}
+.tag-container{
+  display: flex;
+  align-items: center;
+}
+
+
+.tag-container button{
+  border: none;
+  align-items: center;
+  display: flex;
+}
+
+.tag, .tag-container button {
+  margin: 0px 2.5px 0px 2.5px;
+  padding: 2px 8px; 
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+.tag:hover {
+  cursor: pointer;
+  background: #F2F2F2;
+}
+
+
+.bg-bright {
+  background-color: var(--tag-one-color);
+}
+
+.bg-gray {
+  background-color: var(--tag-two-color); 
+}
+
+.bg-light-brown {
+  background-color: var(--tag-three-color); 
+}
+
+.bg-pink-purple {
+  background-color: var(--tag-four-color); 
+}
+
+/* ==========  styling base col element  ============ */
+/* styling wont take effect so it's added to the html*/
+
+/* ==========  styling reading elements  ============ */
+
+.reading{
+  width: 50%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.reading h2{
+  margin-right: 5px;
+  margin-right: 55%;
+  align-items: center;
+}
+
+.reading .card-display{
+  display: flex;
+  width: 100%;
+  height: 60px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin-left: 0;
+  align-items: center;
+
+}
+
+.reading .card-display h3{
+  margin-right: 10px;
+}
+.reading .card-display h3 span:hover{
+  color: inherit;
+}
+
+.reading .card-display .play-kana{
+  display: flex;
+  align-items: center;
+}
+.reading .card-display .play-kana button{
+  border: none;
+  background: none;
+  margin: 5px 0 0 0;
+}
+.reading .card-display .play-kana button:hover{
+  cursor: pointer;
+}
+
+.reading .card-display p{
+  margin-left: 10px;
+}
+.card-display .display-kana button{
+border: none;
+
+}
+/* ==========  styling main elements  ============ */
+.xwrapper-body {
+  width: 80%; 
+  margin: 0 auto;
+  overflow-x: auto;
+  align-items: left;
+}
+
+.card-wrapper{
+  margin: 2% auto;
+  background: #F8F8F8;
+  border: thin solid #727272;
+  width: 50%;
+}
+
+
+.text-description{
+  margin: auto;
+  width: 90%;
+}
+
+text-description p{
+  color: #000000;
+  padding: 5%;
+}
+
+.text-description p a{
+  text-decoration: none;
+  color: #7e3ff5;
+}
+/* ==========  styling table elements  ============ */
+
+
+table {
+  margin: auto;
+  width: 70%;
+  background: #FFFFFF;
+}
+h2{
+  text-align: center;
+  font-size: 2em;
+}
+
+tbody {
+  width: 100%;
+}
+
+.display-kana {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100%; /* Ensure the div takes the full height of the table cell */
+}
+
+tr td div.display-kana button {
+  width: 60px; 
+  height: 60px;
+  border-radius: 12px;
+  background: none;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.45);
+}
+tr td div.display-kana button:hover{
+  cursor: pointer;
+}
+
+.display-kana span:hover{
+  color: inherit;
+  border-radius: 12px;
+}
+.display-kana button span{
+  font-size: 20px; 
+  font-family: "Zen Maru Gothic", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  color: #000000;
+}
+
+.display-romanji {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 50%; 
+}
+
+.yoon{
+  font-size: 24px !important;
+}
