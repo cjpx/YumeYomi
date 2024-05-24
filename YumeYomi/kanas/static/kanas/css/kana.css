@@ -439,6 +439,15 @@ tr td div.display-kana button:hover {
     width: 100%;
   }
 
+  .card-draw{
+    width: 100%;
+    height: 50%;
+  }
+
+  #kanji-container svg{
+    width: 20%;
+  }
+
   h2{
     font-size: 1em;
   }
@@ -499,6 +508,15 @@ tr td div.display-kana button:hover {
     width: 100%;
   }
 
+  .card-draw{
+    width: 100%;
+    height: 50%;
+  }
+
+  #kanji-container svg{
+    width: 20%;
+  }
+
   h2{
     font-size: 1em;
   }
@@ -546,6 +564,15 @@ tr td div.display-kana button:hover {
   .xrow,
   .card-wrapper {
     width: 100%;
+  }
+
+  .card-draw{
+    width: 100%;
+    height: 50%;
+  }
+
+  #kanji-container svg{
+    width: 20%;
   }
 
   h2{
