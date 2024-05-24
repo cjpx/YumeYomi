@@ -24,3 +24,27 @@ function colorLink(){
 }
 
 linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+
+
+
+/*==================== SHOW POPUP WINDOW ====================*/
+document.addEventListener("DOMContentLoaded", function() {
+    var popup = document.getElementById("popup");
+    var openPopupBtn = document.getElementById("openPopup");
+    var closePopupBtn = document.getElementById("closePopup");
+
+    openPopupBtn.addEventListener("click", function() {
+        popup.style.display = "flex";
+    });
+
+    closePopupBtn.addEventListener("click", function() {
+        popup.style.display = "none";
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    });
+});

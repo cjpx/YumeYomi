@@ -1,14 +1,14 @@
 $(document).ready(function() {
     // Add a click event listener to all buttons with class 'play-kana'
-    $('.play-kana').click(function() {
+    $('.play-text').click(function() {
         var character;
 
         // Check if there's an SVG inside the .display-kana
-        var svgInsideDisplayKana = $(this).closest('.display-kana').find('svg').length > 0;
+        var svgInsideDisplayKana = $(this).closest('.say-text').find('svg').length > 0;
 
         if (svgInsideDisplayKana) {
             // If there's an SVG inside .display-kana, get the character associated with the SVG
-            character = $(this).closest('.display-kana').find('span').text();
+            character = $(this).closest('.say-text').find('span').text();
         } else {
             // If there's no SVG inside .display-kana, get the character associated with the .play-kana button
             character = $(this).find('span').text();

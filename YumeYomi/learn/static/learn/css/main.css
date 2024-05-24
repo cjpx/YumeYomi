@@ -10,9 +10,9 @@
   --first-color: #6923D0;
   --first-color-light: #F4F0FA;
   --title-color: #19181B;
-  --text-color: #58555E;
+  --text-color: #000000;
   --text-color-light: #A5A1AA;
-  --body-color: #F9F6FD;
+  --body-color: #FFF;
   --container-color: #FFFFFF;
 
   /*========== Font and typography ==========*/
@@ -150,6 +150,9 @@ img {
   scrollbar-width: none; /* For mozilla */
 }
 
+.nav-item a span{
+  color: var(--text-color) !important;
+}
 /* For Google Chrome and others */
 .nav-container::-webkit-scrollbar {
   display: none;
@@ -256,7 +259,7 @@ img {
 
 /*===== Active link =====*/
 .active {
-  color: var(--first-color);
+  color: var(--text-color);
 }
 
 /* ========== MEDIA QUERIES ==========*/
@@ -383,7 +386,7 @@ img {
 
 p {
   margin: 20px auto;
-  font-size: small;
+  font-size: var(--normal-font-size);
   line-height: 1.5;
   text-align: center;
   color: var(--text-color);
@@ -424,10 +427,6 @@ p {
       text-align: center; 
   }
   
-  .card h3,
-  p {
-      margin: 10px auto; 
-  }
 }
 
 /* Media Query for tablets (min-width: 708px) and (max-width: 1199px) */
@@ -440,10 +439,7 @@ p {
       text-align: center; 
   }
   
-  .card h3,
-  p {
-      margin: 10px auto; 
-  }
+
 }
 
 /* Default media query for other screen sizes */
@@ -456,8 +452,5 @@ p {
       text-align: center; 
   }
   
-  .card h3,
-  p {
-      margin: 10px auto; 
-  }
+
 }
