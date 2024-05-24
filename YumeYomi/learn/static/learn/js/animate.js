@@ -1,11 +1,11 @@
-'use strict';
 
 document.addEventListener('DOMContentLoaded', async function () {
 
     // Define the KVGAnimator class
     var KVGAnimator = function () {
-        function t(t) {
+        function t(t, strokeWidth = 2) { // Default stroke width set to 2
             this.time = t;
+            this.strokeWidth = strokeWidth; // Set the stroke width
         }
         return t.prototype.play = async function (t) {
             var e = this.findTarget(t);
@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             return new Promise(resolve => {
                 var length = t.getTotalLength();
                 t.style.display = "block";
+                t.style.strokeWidth = this.strokeWidth; // Set stroke width
                 if ("undefined" != typeof e && document.getElementById('show-strokes').checked) {
                     e.style.display = "block";
                 }
@@ -71,13 +72,13 @@ document.addEventListener('DOMContentLoaded', async function () {
         for (const char of chars) {
             const svg = await displayKanji(char);
             container.appendChild(svg); // Append SVG to the container
-            animator = new KVGAnimator(500); // Adjust duration as needed
+            animator = new KVGAnimator(500, 4); // Adjust duration and stroke width as needed
             await animator.play(svg);
         }
     }
 
     // Play button event listener
-    document.getElementById('play-button').addEventListener('click', async function () {
+    document.getElementById('play-btn').addEventListener('click', async function () {
         // Get the Kanji text from the hidden span
         const kanjiText = document.getElementById('kanji-text').textContent;
         await displayPhrase(kanjiText);
@@ -94,6 +95,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                 number.style.display = 'none';
             }
         });
+    });
+
+    // Clear button event listener
+    document.getElementById('clear-btn').addEventListener('click', function () {
+        const container = document.getElementById('kanji-container');
+        container.innerHTML = ''; // Clear all SVG elements
     });
 
 });
