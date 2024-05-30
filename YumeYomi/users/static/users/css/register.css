@@ -1,0 +1,166 @@
+
+/*========== VARIABLES CSS ==========*/
+:root {  
+    /*========== Colors ==========*/
+    --form-error: #721c24;
+    --form-error-border: #f5c6cb;
+    --form-error-gb: #f8d7da;
+}
+  
+
+
+.registration-form {
+    width: 50%;
+    margin: auto;
+}
+
+.registration-fieldset {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.registration-legend {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.account-exists {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login-link {
+    color: #007bff; /* Blue color for link */
+    text-decoration: none; /* Remove underline */
+}
+
+.login-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.form-errors {
+    border: 1px solid var(--form-error-border);
+    background-color: var(--form-error-gb);
+    color: var(--form-error);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: var(--normal-font-size); 
+    line-height: 1.5; 
+    height: auto; 
+    padding: 5px;
+}
+
+.field-errors {
+    margin-bottom: 10px;
+}
+
+
+/* ========== MEDIA QUERIES ========== */
+/* Mobile devices (portrait and landscape) */
+@media (min-width: 320px)  and (max-width: 599){
+    .registration-form {
+        padding: 5px;
+    }
+
+    .registration-legend {
+        font-size: 20px;
+    }
+
+    .form-group input {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .form-errors {
+        font-size: 14px;
+    }
+}
+
+/* Tablets and small desktops */
+@media (min-width: 600px) and (max-width: 768px) {
+    .registration-form {
+        padding: 10px;
+    }
+
+    .registration-legend {
+        font-size: 22px;
+    }
+
+    .form-group input {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    .form-errors {
+        font-size: 15px;
+    }
+}
+
+/* Large desktops */
+@media (min-width: 769px) {
+    .registration-form {
+        padding: 15px;
+    }
+
+    .registration-legend {
+        font-size: 24px;
+    }
+
+    .form-group input {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .form-errors {
+        font-size: 16px;
+    }
+}
