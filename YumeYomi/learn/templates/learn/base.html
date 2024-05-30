@@ -14,6 +14,9 @@
     <!--========== CSS ==========-->
     <link rel="stylesheet" type="text/css" href="{% static 'learn/css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'kanas/css/kana.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'learn/css/posts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/register.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/login.css' %}">
 
    {% if title %}
     <title>YumeYomi: {{ title }}</title>
@@ -25,7 +28,12 @@
     <!--========== HEADER ==========-->
     <header class="header">
         <div class="header-container">
-            <img src="{% static 'learn/images/profile.png' %}" alt="" class="header-img">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="header-img profile">
+                <img src="{{ user.profile.image.url }}" class="header-img profile" alt="">
+            </a>
+            
+            {% endif %}
 
             <a href="{% url 'home' %}" class="header-logo">YumeYomi</a>
 
@@ -48,20 +56,17 @@
                     <i class='bx bxs-graduation nav-icon'></i>
                     <span class="nav-logo-name">YumeYomi</span>
                 </a>
-
                 <div class="nav-list">
                     <div class="nav-items">
                         <h3 class="nav-subtitle">Main</h3>
-
                         <a href="{% url 'home' %}" class="nav-link active">
                             <i class='bx bx-home nav-icon'></i>
                             <span class="nav-name">Home</span>
                         </a>
-
                         <a href="{% url 'hiragana' %}" class="nav-link active">
                             <i class='nav-icon'>
                                 <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                   <path d="M13.8 -1.19209e-06C14.2 2.46 15.04 5.76 18.04 8.48L16.74 10.3C14.54 7.9 13.08 4.76 11.8 0.559999L13.8 -1.19209e-06ZM0.98 1.04C1.3 1.06 1.72 1.06 2.08 1.04C3.92 0.96 7.26 0.5 8.52 0.0399995L9.1 1.8C8.82 1.9 8.36 2.04 8.06 2.2C6.74 3.18 3.86 6.5 3.86 10.48C3.86 13.1 5.56 14.04 7.56 14.04C12.22 14.04 13.72 8.96 12.08 1.22L13.94 4.42C15 9.98 13.96 16.14 7.5 16.14C4.34 16.14 1.84 14.38 1.84 10.92C1.84 7.4 3.54 4.72 5.36 2.56C4.44 2.68 2.96 2.86 2.3 2.94C1.9 3 1.56 3.04 1.14 3.12L0.98 1.04Z" fill="#58555E"/>
+                                    <path d="M13.8 -1.19209e-06C14.2 2.46 15.04 5.76 18.04 8.48L16.74 10.3C14.54 7.9 13.08 4.76 11.8 0.559999L13.8 -1.19209e-06ZM0.98 1.04C1.3 1.06 1.72 1.06 2.08 1.04C3.92 0.96 7.26 0.5 8.52 0.0399995L9.1 1.8C8.82 1.9 8.36 2.04 8.06 2.2C6.74 3.18 3.86 6.5 3.86 10.48C3.86 13.1 5.56 14.04 7.56 14.04C12.22 14.04 13.72 8.96 12.08 1.22L13.94 4.42C15 9.98 13.96 16.14 7.5 16.14C4.34 16.14 1.84 14.38 1.84 10.92C1.84 7.4 3.54 4.72 5.36 2.56C4.44 2.68 2.96 2.86 2.3 2.94C1.9 3 1.56 3.04 1.14 3.12L0.98 1.04Z" fill="#58555E"/>
                                 </svg> 
                             </i>
                             <span class="nav-name">Hiragana</span>
@@ -69,7 +74,7 @@
                         <a href="{% url 'katakana' %}" class="nav-link active">
                             <i class='nav-icon'>
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                   <path d="M9.36 0.139999C9.3 0.599999 9.26 1.36 9.24 1.84C9 9.9 6.94 13.78 2.78 16.7L0.94 15.22C1.66 14.82 2.56 14.22 3.24 13.54C5.8 11.14 7.12 7.74 7.16 1.88C7.16 1.44 7.1 0.619999 7.02 0.139999H9.36ZM16.24 4.36C16.18 4.68 16.12 5.12 16.12 5.36C16.04 7.4 15.8 13.1 14.92 15.08C14.5 16 13.8 16.44 12.58 16.44C11.52 16.44 10.34 16.36 9.34 16.28L9.08 14.18C10.12 14.34 11.16 14.44 11.98 14.44C12.58 14.44 12.92 14.24 13.14 13.76C13.82 12.34 14.08 7.82 14.08 5.68H3.88C3.14 5.68 2.2 5.68 1.42 5.76V3.66C2.18 3.74 3.1 3.78 3.86 3.78H13.48C14 3.78 14.44 3.74 14.84 3.66L16.24 4.36Z" fill="#58555E"/>
+                                    <path d="M9.36 0.139999C9.3 0.599999 9.26 1.36 9.24 1.84C9 9.9 6.94 13.78 2.78 16.7L0.94 15.22C1.66 14.82 2.56 14.22 3.24 13.54C5.8 11.14 7.12 7.74 7.16 1.88C7.16 1.44 7.1 0.619999 7.02 0.139999H9.36ZM16.24 4.36C16.18 4.68 16.12 5.12 16.12 5.36C16.04 7.4 15.8 13.1 14.92 15.08C14.5 16 13.8 16.44 12.58 16.44C11.52 16.44 10.34 16.36 9.34 16.28L9.08 14.18C10.12 14.34 11.16 14.44 11.98 14.44C12.58 14.44 12.92 14.24 13.14 13.76C13.82 12.34 14.08 7.82 14.08 5.68H3.88C3.14 5.68 2.2 5.68 1.42 5.76V3.66C2.18 3.74 3.1 3.78 3.86 3.78H13.48C14 3.78 14.44 3.74 14.84 3.66L16.24 4.36Z" fill="#58555E"/>
                                 </svg>
                             </i>
                             <span class="nav-name">Katakana</span>
@@ -78,9 +83,9 @@
                         <div class="nav-dropdown">
                             <a href="#" class="nav-link">
                                 <i class='nav-icon'>
-                                   <svg width="20" height="20" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M1.304 8.356H32.732V11.092H1.304V8.356ZM8.504 24.412H25.28V27.148H8.504V24.412ZM15.524 0.795998H18.368V33.88H15.524V0.795998ZM14.696 9.256L17.108 10.084C13.904 17.716 8.252 24.592 2.024 28.228C1.592 27.544 0.692 26.536 0.08 25.996C6.092 22.864 11.816 16.168 14.696 9.256ZM19.268 9.364C22.112 16.204 27.764 22.756 33.992 25.744C33.308 26.32 32.372 27.4 31.94 28.156C25.568 24.628 20.024 17.752 16.856 10.192L19.268 9.364Z" fill="#58555e"/>
-                                  </svg>
+                                    <svg width="20" height="20" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.304 8.356H32.732V11.092H1.304V8.356ZM8.504 24.412H25.28V27.148H8.504V24.412ZM15.524 0.795998H18.368V33.88H15.524V0.795998ZM14.696 9.256L17.108 10.084C13.904 17.716 8.252 24.592 2.024 28.228C1.592 27.544 0.692 26.536 0.08 25.996C6.092 22.864 11.816 16.168 14.696 9.256ZM19.268 9.364C22.112 16.204 27.764 22.756 33.992 25.744C33.308 26.32 32.372 27.4 31.94 28.156C25.568 24.628 20.024 17.752 16.856 10.192L19.268 9.364Z" fill="#58555e"/>
+                                    </svg>
                                 </i>
                                 <span class="nav-name">Kanji</span>
                                 <i class='bx bx-chevron-down nav-icon nav-dropdown-icon'></i>
@@ -88,8 +93,9 @@
 
                             <div class="nav-dropdown-collapse">
                                 <div class="nav-dropdown-content">
-                                    <a href="#" class="nav-dropdown-item">Radical List</a>
-                                    <a href="#" class="nav-dropdown-item">Drawing</a>
+                                    <a href="#" class="nav-dropdown-item">N1</a>
+                                    <a href="#" class="nav-dropdown-item">N2</a>
+                                    <a href="#" class="nav-dropdown-item">N3</a>
                                 </div>
                             </div>
                         </div>
@@ -98,34 +104,36 @@
                             <i class='bx bx-edit nav-icon'></i>
                             <span class="nav-name">Post</span>
                         </a>
+
+                        <a href="#" class="nav-link">
+                            <i class='bx bx-dice-3 nav-icon'></i>
+                            <span class="nav-name">Random</span>
+                        </a>
                     </div>
 
                     <div class="nav-items">
-                        <h3 class="nav-subtitle">Others</h3>
-
-                        <div class="nav-dropdown">
-                            <a href="#" class="nav-link">
-                                <i class='bx bx-dice-3 nav-icon'></i>
-                                <span class="nav-name">Random</span>
-                            </a>
-                        </div>
-
-                        <a href="#" class="nav-link">
-                            <i class='bx bx-compass nav-icon'></i>
-                            <span class="nav-name">Explore</span>
+                        <h3 class="nav-subtitle">User</h3>
+                        {% if request.user.is_authenticated %}
+                        <form action="{% url 'logout' %}" method="post" class="nav-link logout-form">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-button nav-link">
+                                <i class='bx bx-log-out nav-icon'></i>
+                                <span class="nav-name">Logout</span>
+                            </button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="nav-link">
+                            <i class='bx bx-log-in nav-icon'></i>
+                            <span class="nav-name">Login</span>
                         </a>
-                        <a href="#" class="nav-link">
-                            <i class='bx bx-bookmark nav-icon'></i>
-                            <span class="nav-name">Saved</span>
+                        <a href="{% url 'register' %}" class="nav-link">
+                            <i class='bx bx-user-plus nav-icon'></i>
+                            <span class="nav-name">Register</span>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-
-            <a href="#" class="nav-link nav-logout">
-                <i class='bx bx-log-out nav-icon'></i>
-                <span class="nav-name">Log Out</span>
-            </a>
         </nav>
     </div>
 

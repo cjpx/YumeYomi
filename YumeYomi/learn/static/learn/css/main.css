@@ -204,9 +204,15 @@ img {
   white-space: nowrap;
 }
 
-.nav-logout {
-  margin-top: 5rem;
+.logout-button {
+  border: none;
+  background: none;
+  font-family: var(--body-font);
 }
+.logout-button:hover{
+  cursor: pointer;
+}
+
 
 /* Dropdown */
 .nav-dropdown {
