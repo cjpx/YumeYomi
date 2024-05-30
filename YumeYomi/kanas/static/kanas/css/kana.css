@@ -283,7 +283,7 @@
 .card-wrapper {
   margin: 2% auto;
   background: var(--body-color);
-  border: thin solid #727272;
+  border: thin solid #ccc;
   width: 50%;
 }
 
