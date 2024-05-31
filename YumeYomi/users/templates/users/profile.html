@@ -1,56 +1,43 @@
 {% extends "learn/base.html" %}
 {% block content %}
-<style>
-    /* Profile Section Styles */
-    .profile-section {
-      width: 80%;
-      max-width: 900px;
-      background-color: var(--container-color);
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin: 20px auto;
-      color: var(--text-color);
-    }
 
-    .profile-header {
-      display: flex;
-      align-items: center;
-    }
-
-    .profile-img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-right: 20px;
-    }
-
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .profile-username {
-      margin: 0;
-      color: var(--title-color);
-      font-weight: var(--font-semi-bold);
-      font-size: 1.5rem;
-    }
-
-    .profile-email {
-      margin: 5px 0 0;
-      color: var(--text-color-light);
-    }
-
-</style>
-    <div class="profile-section">
-      <div class="profile-header">
-        <img class="profile-img" src="{{ user.profile.image.url }}" alt="Profile Picture">
-        <div class="profile-info">
-          <h2 class="profile-username">{{ user.username }}</h2>
-          <p class="profile-email">{{ user.email }}</p>
+{% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
         </div>
-      </div>
-      <!-- FORM HERE -->
+    {% endif %}
+
+<div class="profile-section">
+    <div class="profile-header">
+        <img class="profile-avatar" src="{{ user.profile.image.url }}" alt="Profile Picture">
+        <div class="profile-details">
+            <h2 class="profile-username">{{ user.username }}</h2>
+            <p class="profile-email">{{ user.email }}</p>
+        </div>
     </div>
+
+    <form class="profile-form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="profile-fieldset">
+            <legend class="profile-legend">Profile Info</legend>
+            <div class="form-group">
+                {{ u_form.username.label_tag }}
+                {{ u_form.username }}
+            </div>
+            <div class="form-group">
+                {{ u_form.email.label_tag }}
+                {{ u_form.email }}
+            </div>
+            <div class="form-group">
+                {{ p_form.image.label_tag }}
+                {{ p_form.image }}
+            </div>
+            <button type="submit" class="btn-update">Update</button>
+        </fieldset>
+    </form>
+</div>
 {% endblock content %}
