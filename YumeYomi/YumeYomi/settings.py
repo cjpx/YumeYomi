@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "learn.apps.LearnConfig",
     'kanas.apps.KanasConfig',
+    'users_list.apps.UsersListConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
