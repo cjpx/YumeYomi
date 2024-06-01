@@ -1,0 +1,138 @@
+{% extends "learn/base.html" %}
+
+{% block content %}
+
+  <style>
+    .mw-container {
+      width: 100%;
+    }
+
+    .list-card {
+      padding: 10px;
+      margin: 20px;
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+      color: #000000;
+    }
+
+    .top-list-card-header{
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
+    }
+    .top-list-card-header .num-entries{
+      background: #6292d9;
+      border-radius: 3px;
+      margin: 0 2px 0 0;
+      padding: 2px;
+      width: auto;
+      height: auto;
+    }
+    .top-list-card-header .info-type{
+      background: #31c795;
+      border-radius: 3px;
+      margin: 0 0 0 2px;
+      padding: 2px;
+      width: auto;
+      height: auto;
+    }
+
+    .list-card .list-description {
+      width: 100%; 
+      margin: 0;
+      color: #525252;
+    }
+
+    .bottom-list-card-footer {
+      margin: auto 0 0 0;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+    }
+
+    .bottom-list-card-footer .num-like {
+      display: flex;
+      align-items: center;
+    }
+    .bottom-list-card-footer .num-like svg{
+      margin: 0 5px 0 0;
+    }
+
+    .bottom-list-card-footer .user {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%; /* Optional: Add border-radius for a circular profile image */
+      margin: 0 5px 0 0;
+    }
+
+
+    /* Media Query for screens less than 708px */
+    @media only screen and (max-width: 707px) {
+      .list-card {
+
+          width: calc(100% - 20px); 
+          margin: 7.5px; 
+          padding: 20px;
+          text-align: center; 
+      }
+
+    }
+
+    /* For responsiveness, adjust width percentages based on screen size */
+    @media (min-width: 768px) {
+      .list-card .list-description {
+        width: 45%; /* Each line taking about 45% of the width */
+      }
+    }
+
+  </style>
+  <div class="mw-container">
+    <h1>Most Liked Lists</h1>
+    <p>Lists of words loved by most users.</p>
+    {% for list in lists %}
+      {% if list.privacy == 'public' %}
+        <a href="{% url 'list_detail' pk=list.pk %}" class="list-card">
+          <div class="top-list-card-header">
+            <h2 class="list-title">{{ list.title }}</h2>
+            <div class="top-list-card-col-right">
+              <span class="num-entries">{{ list.entry_count }}</span>
+              <span class="info-type">Words</span>
+            </div>
+          </div>
+          <p class="list-description">
+            {{ list.description }}
+          </p>
+          <div class="bottom-list-card-footer">
+            <div class="num-like">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" style="fill: rgba(255, 0, 88, 1);">
+                <path d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z"></path>
+              </svg>
+              <p>{{ list.likes }}</p>
+            </div>
+            <div class="user">
+              <img src="{{ list.author.profile.image.url }}" alt="img profile" class="profile-img">
+              <p>{{ list.author }}</p>
+            </div>
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
+    
+    {% if user.is_authenticated %}
+      <a href="{% url 'create_list' %}">Create a new list</a>
+      {% endif %}
+  </div>
+
+
+
+{% endblock content %}

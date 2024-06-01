@@ -1,0 +1,87 @@
+{% extends "learn/base.html" %}
+
+{% block content %}
+
+<div class="word-container">
+  <div class="word-header">
+    <div class="profile-detail">
+      <img src="{{ word_list.author.profile.image.url }}" alt="profile pic" class="profile-img">
+      <div class="user-info">
+        <a href="#">{{ word_list.author.username }}</a>
+        <h2>{{ word_list.title }}</h2>
+      </div>
+    </div>
+    <div class="tags-section">
+      <span class="word-tag t-kanji">Kanji</span>
+      <span class="word-tag t-hiragana">Hiragana</span>
+      <span class="word-tag t-katakana">Katakana</span>
+    </div>
+  </div>
+  <hr>
+  <div class="word-body">
+    <div class="body-description">
+      <p>{{ word_list.description }}</p>
+    </div>
+    <div class="body-info">
+      <span><strong>Created:</strong> {{ word_list.date_posted|date:"D d M Y, H:i" }}</span>
+      <span><strong>Updated:</strong> {{ word_list.modified_date|date:"D d M Y, H:i" }}</span>
+      <span><strong>Number of entries:</strong> {{ words|length }}</span>
+    </div>
+  </div>
+  <div class="word-footer">
+    <div class="footer-interaction">
+      <button id="like-button" data-wordlist-id="{{ word_list.id }}" data-liked="{{ user_already_liked }}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF0000" width="16" height="16">
+          <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+        </svg>
+        {{ word_list.likes }}
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<ul>
+  {% for entry in words %}
+    <li class="word-list">
+      <a href="{% url 'word_detail' entry.id %}" target="_blank" rel="noopener noreferrer">
+        <div class="list-top-elements">
+          <div class="word-kanji">
+            {{ entry.kanji }}
+          </div>
+          <div class="word-kana">
+            {{ entry.kana }}
+          </div>
+          <div class="word-romanji">
+            <small>
+              {{ entry.romanji }}
+            </small>
+          </div>
+        </div>
+        <div class="list-tags-body">
+          {% for tag in entry.tags.all %}
+          <p class="tag tag-{{ tag.name|slugify }}">{{ tag.name }}</p>
+          {% endfor %}
+        </div>
+        <div class="word-meaning">
+          {{ entry.meaning }}
+        </div>
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
+{% if user.is_authenticated and word_list.author == user %}
+<form id="word-form" method="post" action="{% url 'add_word' list_pk=word_list.pk %}">
+  {% csrf_token %}
+  <!-- Other fields for the word -->
+  
+  <button type="submit">Add a new word</button>
+</form>
+<a href="{% url 'toggle_privacy' pk=word_list.pk %}">Toggle Privacy</a>
+<a href="{% url 'list_index' %}">Back to lists</a>
+{% else %}
+  <a href="{% url 'list_index' %}">Back to lists</a>
+{% endif %}
+
+{% endblock %}

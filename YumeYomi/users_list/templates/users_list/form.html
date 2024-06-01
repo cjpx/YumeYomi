@@ -1,0 +1,19 @@
+{% extends "learn/base.html" %}
+
+{% block content %}
+  <h1>{{ form.instance.pk|yesno:"Edit,Create" }} {{ model_name }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="id_kanji">Word:</label>
+    {{ form.kanji }}
+    <label for="id_kana">Kana:</label>
+    {{ form.kana }}
+    <label for="id_romanji">Romanji:</label>
+    {{ form.romanji }}
+    <label for="id_meaning">Meaning:</label>
+    {{ form.meaning }}
+    <label for="id_tags"></label>
+    {{ form.tags }}
+    <button type="submit">Save</button>
+</form>
+{% endblock %}
