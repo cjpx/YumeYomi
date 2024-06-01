@@ -1,0 +1,277 @@
+.word-container {
+    width: 60%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px 10px 40px 10px;
+}
+  
+.word-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-detail {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-info a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+.user-info h2 {
+  margin: 5px 0 0 0;
+  font-size: 1.5rem;
+  color: #555;
+}
+
+.tags-section {
+  display: flex;
+  gap: 10px;
+}
+
+.word-tag {
+  padding: 3px 7px 3px 7px;
+  border-radius: 7px;
+  color: #000;
+  font-size: 0.7rem;
+  width: auto;
+  height: 20px;
+}
+
+.t-kanji {
+  background-color: #90ee90;
+}
+
+.t-hiragana {
+  background-color: #ff69b4;
+}
+
+.t-katakana {
+  background-color: #dda0dd;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.word-body {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.body-description {
+  width: 60%;
+  margin: 0 10px 0 0;
+}
+
+.body-description p {
+  color: #525252;
+  line-height: 1.6;
+}
+
+.body-info {
+  text-align: right;
+  color: #525252;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+  
+.body-info span {
+  display: block;
+  margin-bottom: 0 0 5px 0;
+  padding: 0;
+}
+
+.body-info span strong {
+  color: #000;
+}
+
+.word-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer-interaction {
+  font-size: 1.2rem;
+}
+
+.footer-interaction #like-button{
+    font-family: var(--body-font);
+    background: none;
+    border: none;
+    align-items: center;
+    display: flex;
+}
+.footer-interaction #like-button:hover{
+    cursor: pointer;
+    background: #9b9a9a;
+    border-radius: 5px;
+}
+.footer-interaction svg{
+    margin: 0 5px 0 0;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+
+ul .word-list{
+    width: 60%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    list-style-type: none;
+    margin: 10px 10px 30px 10px;
+}
+ul .word-list a{
+    text-decoration: none;
+    color: inherit;
+}
+.list-top-elements{
+    display: flex;
+    align-self: center;
+}
+
+.list-top-elements, .list-tags-body, .word-meaning{
+    margin-left: 20px;
+}
+
+
+.word-meaning{
+    margin-top: 15px;
+    padding-bottom: 5px;
+}
+.word-kanji, .word-kana, .word-romanji{
+    margin: 0 20px 0 0;
+}
+.word-kanji{
+    font-size: 1.3em;
+}
+.word-kana{
+    color: #605F5F;
+}
+.word-romanji small{
+    color: #605F5F;
+    font-weight:  var( --font-light);
+}
+
+/*========== TAGS ==========*/
+
+.list-tags-body{
+    margin-top: 5px;
+    display: flex;
+    align-items: left;
+}
+.tag{
+    padding: 3px 10px 3px 10px;
+    border-radius: 7px;
+    color: #000;
+    font-size: 0.7rem;
+    width: auto;
+    height: 20px;
+    font-weight: var(--normal-font-weight);
+}
+.tag-popular{
+    background-color: #d82f2f;
+}
+.tag-usually-written-in-kana-alone{
+    background-color: #A855F7;
+}
+.tag-kanji{
+    background-color: #9DFF20;
+}
+.tag-noun{
+    background-color: #FCAB55;
+}
+
+.tag-jlpt-n1, .tag-jlpt-n2, .tag-jlpt-n3, .tag-jlpt-n4, .tag-jlpt-n5{
+    background-color: #EB03FF;
+}
+
+
+
+
+/* ========== MEDIA QUERIES ========== */
+@media (max-width: 768px) {
+    .word-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .word-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-detail {
+        margin-bottom: 10px;
+    }
+
+    .profile-img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .user-info h2 {
+        font-size: 1.2rem;
+    }
+
+    .tags-section {
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    .word-body {
+        flex-direction: column;
+    }
+
+    .body-description, .body-info {
+        width: 100%;
+        text-align: left;
+    }
+
+    .body-info {
+        margin-top: 10px;
+        align-items: flex-start;
+    }
+
+    ul .word-list {
+        width: 100%;
+    }
+
+    .list-top-elements, .list-tags-body, .word-meaning {
+        margin-left: 10px;
+    }
+
+    .word-kanji, .word-kana, .word-romanji {
+        margin: 0 10px 0 0;
+    }
+
+    .word-kanji {
+        font-size: 1.1em;
+    }
+}
