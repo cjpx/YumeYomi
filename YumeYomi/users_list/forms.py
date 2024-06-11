@@ -12,15 +12,17 @@ class WordForm(forms.ModelForm):
 
     class Meta:
         model = Word
-        fields = ['kanji', 'kana', 'romanji', 'meaning']
+        fields = ['kanji', 'kana', 'romanji', 'meaning', 'usage_example']
+
+    def clean_tags(self):
+        tag_names = self.cleaned_data.get('tags')
+
+        return [tag.strip() for tag in tag_names.split(',') if tag.strip()]#split input tags to individual elements
 
     def save(self, commit=True):
         word = super().save(commit=False)
-        tag_names = self.cleaned_data.get('tags')
+        tag_names_list = self.cleaned_data.get('tags')
 
-        # Split the input tag string into individual tag names
-        tag_names_list = [tag.strip() for tag in tag_names.split(',') if tag.strip()]
-        
         if commit:
             word.save()  # Save the word instance first
             
