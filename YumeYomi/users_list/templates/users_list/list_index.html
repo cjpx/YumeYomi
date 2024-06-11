@@ -1,67 +1,126 @@
 {% extends "learn/base.html" %}
 {% block content %}
-  <div class="mw-container">
+<div class="mw-container">
     <h1 class="most-like">Most Liked Lists</h1>
     <p class="most-liked">Lists of words liked by most users.</p>
     {% for list in lists %}
-      {% if list.privacy == 'public' %}
-        <a href="{% url 'list_detail' pk=list.pk %}" class="list-card">
-          <div class="top-list-card-header">
-            <h2 class="list-title">{{ list.title }}</h2>
-            <div class="top-list-card-col-right">
-              <span class="num-entries entryCount">{{ list.entry_count }}</span>
-              <span class="info-type infoType">Words</span>
+        {% if list.privacy == 'public' %}
+        <div class="list-card">
+            <a href="{% url 'list_detail' pk=list.pk %}">
+                <div class="top-list-card-header">
+                    <h2 class="list-title">{{ list.title }}</h2>
+                    <div class="top-list-card-col-right">
+                        <span class="num-entries entryCount">{{ list.entry_count }}</span>
+                        <span class="info-type infoType">Words</span>
+                    </div>
+                </div>
+                <p class="list-description">{{ list.description }}</p>
+            </a>
+            <div class="bottom-list-card-footer">
+                <div class="num-like">
+                    {% if user.is_authenticated %}
+                    <button class="like-btn" data-id="{{ list.id }}">
+                        {% if list.already_liked %}
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="liked">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                          </svg>
+                        {% else %}
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="unliked">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                          </svg>
+                        {% endif %}
+          
+                    </button>
+                    {% endif %}
+                    <p class="like-count" id="like-count-{{ list.id }}">{{ list.likes }}</p>
+                </div>
+                <div class="user">
+                    <a href="{% url 'profile' %}">
+                        <img src="{{ list.author.profile.image.url }}" alt="img profile" class="profile-img">
+                    </a>
+                    <p>{{ list.author }}</p>
+                </div>
             </div>
-          </div>
-          <p class="list-description">
-            {{ list.description }}
-          </p>
-          <div class="bottom-list-card-footer">
-            <div class="num-like">
-              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" style="fill: rgba(255, 0, 88, 1);">
-                <path d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z"></path>
-              </svg>
-              <p>{{ list.likes }}</p>
-            </div>
-            <div class="user">
-              <img src="{{ list.author.profile.image.url }}" alt="img profile" class="profile-img">
-              <p>{{ list.author }}</p>
-            </div>
-          </div>
-        </a>
-      {% endif %}
+        </div>
+        {% endif %}
     {% endfor %}
-    
     {% if user.is_authenticated %}
-      <a href="{% url 'create_list' %}">
+    <a href="{% url 'create_list' %}">
         <button type="submit" class="crt-list-btn">Create a new list</button>
-      </a>
+    </a>
     {% endif %}
-  </div>
+</div>
 
-  <script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').content;
+
+    document.querySelectorAll('.like-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const wordListId = this.dataset.id;
+            const svg = this.querySelector('svg');
+            const action = svg.classList.contains('liked') ? 'unlike' : 'like';
+
+            fetch("{% url 'like_word_list' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ word_list_id: wordListId, action: action })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                } else {
+                    const likeCountElem = document.getElementById(`like-count-${wordListId}`);
+                    likeCountElem.textContent = data.likes_count;
+                    if (data.liked) {
+                        svg.classList.add('liked');
+                        svg.classList.remove('unliked');
+                        svg.querySelector('path').style.fill = "red";
+                        svg.querySelector('path').style.stroke = "red";
+                        button.closest('.num-like').style.border = "thin solid #EAE2E1";
+                        button.closest('.num-like').style.backgroundColor = "#FBD0D8";
+                        button.closest('.num-like').style.borderWidth = "3px";
+                    } else {
+                        svg.classList.add('unliked');
+                        svg.classList.remove('liked');
+                        svg.querySelector('path').style.fill = "none";
+                        svg.querySelector('path').style.stroke = "black";
+                        button.closest('.num-like').style.border = "thin solid #EAE2E1";
+                        button.closest('.num-like').style.backgroundColor = "transparent";
+                        button.closest('.num-like').style.borderWidth = "3px";
+                    }
+                }
+            });
+        });
+    });
+});
+
     function getRandomColor() {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
 
     function setRandomBackgroundColor() {
-      const entryCountElements = document.querySelectorAll(".entryCount");
-      const infoTypeElements = document.querySelectorAll(".infoType");
+        const entryCountElements = document.querySelectorAll(".entryCount");
+        const infoTypeElements = document.querySelectorAll(".infoType");
 
-      entryCountElements.forEach(element => {
-        element.style.backgroundColor = getRandomColor();
-      });
+        entryCountElements.forEach(element => {
+            element.style.backgroundColor = getRandomColor();
+        });
 
-      infoTypeElements.forEach(element => {
-        element.style.backgroundColor = getRandomColor();
-      });
+        infoTypeElements.forEach(element => {
+            element.style.backgroundColor = getRandomColor();
+        });
     }
 
     setRandomBackgroundColor();
-  </script>
+</script>
 {% endblock content %}
