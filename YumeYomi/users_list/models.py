@@ -23,20 +23,28 @@ class WordList(models.Model):
     likes = models.PositiveIntegerField(default=0)
     privacy = models.CharField(max_length=10, choices=PRIVACY_CHOICES, default='public')
 
-
     def __str__(self):
         return self.title
     
     def entry_count(self):
         return self.words.count()
     
-    def count_likes(self):
-        return self.likes.count()
-
     def user_already_liked(self, user):
-        return self.likes.filter(user=user).exists()
-
+        return self.like_set.filter(user=user).exists()
     
+    def like(self, user):
+        if not self.user_already_liked(user):
+            Like.objects.create(user=user, word_list=self)
+            self.likes += 1
+            self.save()
+
+    def unlike(self, user):
+        if self.user_already_liked(user):
+            self.like_set.get(user=user).delete()
+            self.likes -= 1
+            self.save()
+
+
 class Word(models.Model):
     word_list = models.ForeignKey(WordList, related_name='words', on_delete=models.CASCADE)
     kanji = models.CharField(max_length=255, blank=True)
@@ -44,6 +52,7 @@ class Word(models.Model):
     romanji = models.CharField(max_length=255)
     meaning = models.TextField()
     tags = models.ManyToManyField(Tag, blank=True)
+    usage_example = models.CharField(max_length=255, blank=True) # the word in a sententence
     
     def __str__(self):
         return self.kana
