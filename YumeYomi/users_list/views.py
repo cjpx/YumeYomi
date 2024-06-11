@@ -1,23 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
+import json
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from .models import WordList,  Word,Like, Tag
+from .models import WordList,  Word, Like, Tag
 from .forms import WordListForm, WordForm
 
 def list_index(request):
     public_lists = WordList.objects.filter(privacy='public')
+    for word_list in public_lists:
+        word_list.already_liked = word_list.user_already_liked(request.user) if request.user.is_authenticated else False
     return render(request, 'users_list/list_index.html', {'lists': public_lists})
 
 def list_detail(request, pk):
     word_list = get_object_or_404(WordList, pk=pk)
     words = word_list.words.all()
 
-    # Check if the user is the author or the list is public
     if word_list.privacy == 'private' and word_list.author != request.user:
-        # Return a response indicating that the user is not authorized
         return render(request, 'users_list/not_authorized.html')
     
-    # Render the template as usual
     return render(request, 'users_list/list_detail.html', {'word_list': word_list, 'words': words})
 
 @login_required
@@ -80,19 +82,32 @@ def toggle_privacy(request, pk):
     return redirect('list_index')
 
 @login_required
-def like_word_list(request, pk):
-    word_list = get_object_or_404(WordList, pk=pk)
-    if not word_list.user_already_liked(request.user):
-        Like.objects.create(user=request.user, word_list=word_list)
-    return redirect('list_index')
+@csrf_exempt
+@require_POST
+def like_word_list(request):
+    try:
+        data = json.loads(request.body)
+        word_list_id = data.get('word_list_id')
+        action = data.get('action')
+        if word_list_id and action:
+            word_list = WordList.objects.get(id=word_list_id)
+            if action == 'like':
+                word_list.like(request.user)
+            else:
+                word_list.unlike(request.user)
+            return JsonResponse({'likes_count': word_list.likes, 'liked': action == 'like'})
+    except WordList.DoesNotExist:
+        return JsonResponse({'error': 'WordList not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 @login_required
 def unlike_word_list(request, pk):
     word_list = get_object_or_404(WordList, pk=pk)
-    like = Like.objects.filter(user=request.user, word_list=word_list)
-    if like.exists():
-        like.delete()
-    return redirect('list_index')
+    Like.objects.filter(user=request.user, word_list=word_list).delete()
+    return redirect('list_index', pk=pk)
 
 
 def toggle_like(request):
