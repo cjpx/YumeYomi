@@ -1,0 +1,72 @@
+{% extends "learn/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Radicals</h1>
+    <p>In Japanese writing, radicals refer to the basic components or building blocks of kanji characters. Kanji, which are adopted Chinese characters used in Japanese writing, are composed of various radicals. These radicals often give hints about the meaning or pronunciation of a kanji character.
+
+        Radicals themselves can sometimes be standalone characters, but more commonly, they serve as components within more complex characters. For example, the kanji character 水 (mizu, meaning "water") consists of the radical 氵, which is a simplified form of the character for "water."
+        
+        Understanding radicals is essential for learning kanji efficiently because they can provide clues about how to write, read, and understand the meaning of kanji characters. Many kanji dictionaries and learning resources organize characters by their radicals, making it easier for learners to navigate and memorize the vast number of kanji used in Japanese writing.</p>
+    <h4 class="mb-4">Radicals List</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Radical ID</th>
+                    <th>Radical</th>
+                    <th>Other Forms</th>
+                    <th>Radical Meaning</th>
+                    <th>Radical Stroke Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for radical in radicals %}
+                <tr>
+                    <td>{{ radical.radical_id }}</td>
+                    <td><a href="{% url 'radical_detail' radical.radical %}" target="_blank" rel="noopener noreferrer">{{ radical.radical }}</a></td>
+                    <td>{{ radical.other_forms }}</td>
+                    <td>{{ radical.radical_meaning }}</td>
+                    <td>
+                        {% if radical.radical_stroke_count > 1 %}
+                            {{ radical.radical_stroke_count }} strokes
+                        {% else %}
+                            {{ radical.radical_stroke_count }} stroke
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    /* Custom CSS */
+    .container {
+        max-width: 900px; /* Limiting container width */
+        justify-content: center;
+        align-items: center;
+    }
+    h1 {
+        font-size: 2.5rem; /* Larger heading font size */
+        color: #333; /* Dark text color */
+    }
+    table {
+        width: 100%;
+        margin-top: 1rem; /* Top margin for the table */
+    }
+    th, td {
+        padding: 0.75rem;
+        text-align: center; /* Center align table content */
+    }
+    th {
+        background-color: #9f9f9f; /* Blue background for table header */
+        color: #fff; /* White text color */
+    }
+    tbody tr:hover {
+        background-color: #f5f5f5; /* Light gray background on hover */
+    }
+</style>
+
+{% endblock %}
