@@ -53,6 +53,7 @@ class Word(models.Model):
     meaning = models.TextField()
     tags = models.ManyToManyField(Tag, blank=True)
     usage_example = models.CharField(max_length=255, blank=True) # the word in a sententence
+    translation = models.CharField(max_length=255, blank=True)
     
     def __str__(self):
         return self.kana
