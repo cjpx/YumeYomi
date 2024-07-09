@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'kanas.apps.KanasConfig',
     'users_list.apps.UsersListConfig',
     'users.apps.UsersConfig',
+    'jp_word_guess.apps.JpWordGuessConfig'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
