@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .models import WordList,  Word, Like, Tag
 from .forms import WordListForm, WordForm
+from janome.tokenizer import Tokenizer #splliting jp text
 
 def list_index(request):
     public_lists = WordList.objects.filter(privacy='public')
@@ -131,4 +132,9 @@ def word_detail(request, word_id):
             return redirect('word_detail', word_id=word.id)
     else:
         form = WordForm(instance=word)
-    return render(request, 'users_list/word.html', {'word': word, 'form': form})
+
+    tokenizer = Tokenizer()
+    text = word.usage_example
+    tokens = tokenizer.tokenize(text)
+    usage_example_words = [token.surface for token in tokens]
+    return render(request, 'users_list/word.html', {'word': word, 'form': form, 'usage_example_words': usage_example_words})
