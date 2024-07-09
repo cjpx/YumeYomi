@@ -1,11 +1,30 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .import views
+from .forms import RadicalForm
 from django.http import HttpResponse
-from .models import Post
+from .models import Post, Radicals
 from gtts import gTTS
 import io
 
 
+
+def radicals(request):
+    radicals = Radicals.objects.all()
+    return render(request, "learn/radicals.html", {'radicals': radicals})
+
+def radical_detail(request, radical):
+    radical_obj = get_object_or_404(Radicals, radical=radical)
+    readings_hiragana = radical_obj.reading_hiragana.split(", ")
+    readings_romanji = radical_obj.reading_romanji.split(", ")
+
+    readings = zip(readings_hiragana, readings_romanji)
+
+    context = {
+        'radical' : radical_obj,
+        'readings': readings
+    }
+
+    return render(request, 'learn/radical_detail.html', context)
 
 def home(request):
     context = {"title" : "Home Page!!"}
