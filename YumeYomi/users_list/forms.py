@@ -12,7 +12,7 @@ class WordForm(forms.ModelForm):
 
     class Meta:
         model = Word
-        fields = ['kanji', 'kana', 'romanji', 'meaning', 'usage_example']
+        fields = ['kanji', 'kana', 'romanji', 'meaning', 'usage_example', 'translation']
 
     def clean_tags(self):
         tag_names = self.cleaned_data.get('tags')
