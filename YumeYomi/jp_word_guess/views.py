@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
+from learn .models import Radicals
+
 import random
 
 # Dictionary mapping Hiragana characters to their romanji equivalents
@@ -115,7 +118,34 @@ def random_word(request):
             correct_romanji = merged_dict[character]
             random_reading = character  # Store the selected character for display
             radical_char_meaning = ''
-        
+        elif selected_set == 'radical':
+            # Fetch a random radical instance
+            radical = Radicals.objects.order_by('?').first()
+
+            # Split readings into lists
+            readings_hiragana = radical.reading_hiragana.split(",")
+            readings_romanji = radical.reading_romanji.split(",")
+
+            # Ensure hiragana and romanji readings are matched correctly
+            if len(readings_hiragana) != len(readings_romanji) or len(readings_hiragana) == 0:
+                return HttpResponse("Error: Invalid data in database", status=500)
+
+            # Randomly select an index to display
+            random_index = random.randint(0, len(readings_hiragana) - 1)
+            random_hiragana = readings_hiragana[random_index].strip()
+            correct_romanji = readings_romanji[random_index].strip()
+
+            # Store selected values in session
+            request.session['character'] = radical.radical
+            request.session['correct_romanji'] = correct_romanji
+            request.session['random_reading'] = random_hiragana
+            request.session['radical_meaning'] = radical.radical_meaning
+
+            # Display only one reading and its corresponding romanji
+            radical_char_meaning = f"{radical.radical} meaning: {radical.radical_meaning}, hiragana reading: {random_hiragana}, romanji reading {correct_romanji}"
+
+            character = radical.radical
+            random_reading = random_hiragana
         else:
             return HttpResponse("Invalid character set selected", status=400)
 
