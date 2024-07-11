@@ -5,7 +5,7 @@
     <div class="container-content">
         {% if character_display %}
             <h1>{{ character_display }}</h1>
-
+            
             {% if request.session.selected_set == 'radical' %}
             <div class="card-display say-text">
                 <p><span>{{ random_reading }}</span></p>
@@ -71,40 +71,4 @@
     });
 </script>
 
-<style>
-    .random-container {
-        display: flex;
-        gap: 20px; /* Adds space between the content and checkboxes */
-        align-items: center; /* Centers items vertically */
-    }
-    .container-content {
-        width: 500px;
-        height: 350px;
-        border-radius: 7px;
-        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.25);
-        background-color: #f9f9f9; /* Adds a background color */
-        padding: 20px; /* Adds padding inside the content container */
-        align-items: center;
-        justify-content: center;
-    }
-    .check-boxes {
-        display: flex;
-        flex-direction: column;
-        gap: 10px; /* Adds space between checkboxes */
-    }
-    .checkbox-item {
-        display: flex;
-        align-items: center;
-    }
-    .checkbox-item input[type="checkbox"] {
-        margin-right: 10px; /* Adds space between checkbox and label */
-    }
-
-    .container-content input[type="text"] {
-        border-radius: 7px;
-        border: thin solid #000;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
 {% endblock %}
