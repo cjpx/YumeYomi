@@ -1,0 +1,88 @@
+{% extends "learn/base.html" %}
+
+{% block content %}
+<div class="random-container">
+    <div class="container-content">
+        {% if character_display %}
+            <h1>{{ character_display }}</h1>
+            
+            <form method="post" action="{% url 'random' %}">
+                {% csrf_token %}
+                <label for="user_input"></label>
+                <input type="text" id="user_input" name="user_input" placeholder="Romanji" autocomplete="off" autofocus required>
+                <br><br>
+                <button type="submit">Submit</button>
+            </form>
+        {% endif %}
+
+        {% if result_message %}
+            <p>{{ result_message }}</p>
+            <form method="post" action="{% url 'random' %}">
+                {% csrf_token %}
+                <input type="hidden" name="character_set" value="{{ request.session.selected_set }}">
+                <button type="submit">Try Again</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <form method="post" id="character-form" action="{% url 'random' %}">
+        {% csrf_token %}
+        <div class="checkbox-item">
+            <input type="radio" name="character_set" id="hiragana" value="hiragana" {% if request.session.selected_set == 'hiragana' %}checked{% endif %} required>
+            <label for="hiragana">Hiragana</label>
+        </div>
+        <div class="checkbox-item">
+            <input type="radio" name="character_set" id="katakana" value="katakana" {% if request.session.selected_set == 'katakana' %}checked{% endif %} required>
+            <label for="katakana">Katakana</label>
+        </div>
+    </form>
+    <p id="selected-message">Selected set: {{ request.session.selected_set }}</p>
+</div>
+
+<script>
+    document.querySelectorAll('input[name="character_set"]').forEach((radio) => {
+        radio.addEventListener('change', () => {
+            const selectedSet = document.querySelector('input[name="character_set"]:checked').value;
+            document.getElementById('selected-message').innerText = `Selected set: ${selectedSet}`;
+            document.getElementById('character-form').submit();
+        });
+    });
+</script>
+
+<style>
+    .random-container {
+        display: flex;
+        gap: 20px; /* Adds space between the content and checkboxes */
+        align-items: center; /* Centers items vertically */
+    }
+    .container-content {
+        width: 500px;
+        height: 350px;
+        border-radius: 7px;
+        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.25);
+        background-color: #f9f9f9; /* Adds a background color */
+        padding: 20px; /* Adds padding inside the content container */
+        align-items: center;
+        justify-content: center;
+    }
+    .check-boxes {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Adds space between checkboxes */
+    }
+    .checkbox-item {
+        display: flex;
+        align-items: center;
+    }
+    .checkbox-item input[type="checkbox"] {
+        margin-right: 10px; /* Adds space between checkbox and label */
+    }
+
+    .container-content input[type="text"] {
+        border-radius: 7px;
+        border: thin solid #000;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
