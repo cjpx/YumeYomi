@@ -6,13 +6,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
+from jp_word_guess import views as word_guess_view
 from kanas import views as kana_views
 from users import views as user_views
 from users_list import views as users_list_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
     path('hiragana/', RedirectView.as_view(url='/ひらがな/')),
     path('ひらがな/', kana_views.hiragana, name='hiragana'),
     
@@ -35,6 +35,8 @@ urlpatterns = [
     path('unlike/<int:pk>/', users_list_view.unlike_word_list, name='unlike_word_list'),
     path('add_tag/', users_list_view.add_tag, name='add_tag'),
     path('word/<int:word_id>/', users_list_view.word_detail, name='word_detail'),
+
+    path('random/', word_guess_view.random_word, name='random'),
     
     path("", include("learn.urls")),
 ]
