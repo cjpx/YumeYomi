@@ -35,6 +35,10 @@
             <input type="radio" name="character_set" id="katakana" value="katakana" {% if request.session.selected_set == 'katakana' %}checked{% endif %} required>
             <label for="katakana">Katakana</label>
         </div>
+        <div class="checkbox-item">
+            <input type="radio" name="character_set" id="kanas" value="kanas" {% if request.session.selected_set == 'kanas' %}checked{% endif %} required>
+            <label for="both">Hiragana & Katakana</label>
+        </div>
     </form>
     <p id="selected-message">Selected set: {{ request.session.selected_set }}</p>
 </div>
