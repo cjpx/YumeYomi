@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'users/css/profile.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'users_list/css/list_detail.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'users_list/css/list_index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'jp_word_guess/css/random.css' %}">
     <title>
         {% block title %}
             YumeYomi: {{ title }}
@@ -202,7 +203,7 @@
                     </div>
 
                     <div class="card">
-                        <a href="">
+                        <a href="{% url 'radicals' %}">
                             <div class="icon-box rad-list">
                                 <i>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -290,7 +291,7 @@
                         </a>
                     </div>
                 </div>
-          </div>
+            </div>
         </div>
   
         {% endblock %}
