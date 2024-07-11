@@ -108,6 +108,14 @@ def random_word(request):
             correct_romanji = katakana_dict[character]
             random_reading = ''  # Initialize as empty for consistency
             radical_char_meaning = ''
+        elif selected_set == 'kanas':
+            # Merge hiragana and katakana dictionaries
+            merged_dict = {**hiragana_dict, **katakana_dict}
+            character = random.choice(list(merged_dict.keys()))
+            correct_romanji = merged_dict[character]
+            random_reading = character  # Store the selected character for display
+            radical_char_meaning = ''
+        
         else:
             return HttpResponse("Invalid character set selected", status=400)
 
