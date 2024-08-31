@@ -1,0 +1,110 @@
+{% extends "learn/base.html" %}
+{% block content %}
+<div id="character-list"></div>
+<div class="radical-space">
+    <div class="radical">
+        {% for radical in radicals %}
+            <input type="checkbox" id="radical-{{ radical.radical_id }}" class="hidden-check">
+            <label for="radical-{{ radical.radical_id }}" class="radical-search" data-radical-id="{{ radical.radical_id }}">
+                {{ radical.radical }}
+            </label>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .hidden-check {
+        display: none;
+    }
+
+    .radical-space {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; 
+        padding: 20px; 
+    }
+
+    .radical {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Space between items */
+        justify-content: center;
+    }
+
+    .radical-search {
+        display: inline-flex;
+        align-items: center; 
+        justify-content: center; 
+        width: 40px; 
+        height: 40px; 
+        line-height: 40px; 
+        text-align: center;
+        background-color: #f0f0f0; 
+        color: #282828; 
+        border-radius: 5px; 
+        cursor: pointer; 
+        font-size: 20px; 
+        transition: background 0.5s ease; 
+    }
+
+    .radical-search:hover {
+        background: #6f6d6d;
+    }
+
+    .selected {
+        background: #6f6d6d;
+        color: white;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const selectedRadicals = new Set();  // To keep track of selected radicals
+
+        document.querySelectorAll('.radical-search').forEach(label => {
+            label.addEventListener('click', async (event) => {
+                const radicalId = event.target.getAttribute('data-radical-id');
+                
+                if (!radicalId) return;
+
+                // Toggle the selected state
+                if (selectedRadicals.has(radicalId)) {
+                    selectedRadicals.delete(radicalId);
+                    event.target.classList.remove('selected');
+                } else {
+                    selectedRadicals.add(radicalId);
+                    event.target.classList.add('selected');
+                }
+
+                // Fetch and display characters based on selected radicals
+                try {
+                    const response = await fetch(`/fetch-characters/?radicals[]=${[...selectedRadicals].join('&radicals[]=')}`);
+                    if (!response.ok) throw new Error('Network response was not ok');
+
+                    const data = await response.json();
+                    const characterList = document.getElementById('character-list');
+                    characterList.innerHTML = '';
+
+                    if (data.characters.length > 0) {
+                        data.characters.forEach(character => {
+                            const div = document.createElement('div');
+                            // Ensure character.id is used here
+                            div.innerHTML = `<strong><a href="/character/${character.id}/">${character.name}</a></strong> - Meaning: ${character.meaning} - Readings: ${character.readings}`;
+                            characterList.appendChild(div);
+                        });
+                    } else {
+                        characterList.innerHTML = 'No characters found for these radicals.';
+                    }
+                } catch (error) {
+                    console.error('Error fetching characters:', error);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+{% endblock %}
