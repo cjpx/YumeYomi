@@ -4,6 +4,8 @@ import json
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+
 from .models import WordList,  Word, Like, Tag
 from .forms import WordListForm, WordForm
 from janome.tokenizer import Tokenizer #splliting jp text
@@ -121,8 +123,6 @@ def toggle_like(request):
         return JsonResponse({'success': True, 'liked': not already_liked})
     else:
         return JsonResponse({'success': False})
-
-
 def word_detail(request, word_id):
     word = get_object_or_404(Word, id=word_id)
     if request.method == 'POST':
@@ -137,4 +137,16 @@ def word_detail(request, word_id):
     text = word.usage_example
     tokens = tokenizer.tokenize(text)
     usage_example_words = [token.surface for token in tokens]
-    return render(request, 'users_list/word.html', {'word': word, 'form': form, 'usage_example_words': usage_example_words})
+
+    # Create a mapping of example_word to its word_id
+    existing_words = {w.kanji: w.id for w in Word.objects.filter(kanji__in=usage_example_words)}
+
+    # Map the example words to their IDs
+    word_id_map = {word.kanji: word.id for word in Word.objects.filter(kanji__in=usage_example_words)}
+
+    return render(request, 'users_list/word.html', {
+        'word': word,
+        'form': form,
+        'usage_example_words': usage_example_words,
+        'word_id_map': word_id_map
+    })
