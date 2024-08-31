@@ -7,5 +7,12 @@ __pycache__/
 *.pyo
 *.pyd
 
+# Django migrations
+*/migrations/*.py
+*/migrations/__pycache__/
+
+# Database
+db.sqlite3
+
 # Ignore environment configuration files
 .env
