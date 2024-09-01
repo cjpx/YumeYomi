@@ -1,0 +1,77 @@
+
+.hidden-check {
+    display: none;
+}
+.radical-space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 20px; 
+}
+.radical {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between items */
+    justify-content: center;
+}
+.radical-search {
+    display: inline-flex;
+    align-items: center; 
+    justify-content: center; 
+    width: 50px; 
+    height: 50px; 
+    line-height: 50px; 
+    text-align: center;
+    background-color: #e0e0e0; 
+    color: #333; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 24px; 
+    transition: background 0.3s ease, color 0.3s ease; 
+}
+.radical-search:hover {
+    background: #333;
+    color: #fff;
+}
+.selected {
+    background: #333;
+    color: #fff;
+}
+.character-list {
+    display: flex;
+    flex-direction: row; /* Display items in a horizontal row */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+    justify-content: center; /* Center items horizontally within the container */
+}
+.character-item {
+    display: flex;
+    flex-direction: column; /* Stack content vertically inside each item */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 180px; /* Adjust width as needed */
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+.character-item:hover {
+    background: #f9f9f9;
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+.character-item h1 {
+    font-size: 28px;
+    margin: 0 0 10px;
+    color: #333;
+}
+.character-item p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 16px;
+}
