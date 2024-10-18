@@ -9,17 +9,21 @@
   /*========== Colors ==========*/
   --first-color: #6923D0;
   --first-color-light: #F4F0FA;
-  --title-color: #19181B;
+  --title-color: #1f1f1f;
   --text-color: #000000;
   --text-color-light: #A5A1AA;
   --body-color: #FFF;
+  --body-color-nav:#fff;
   --container-color: #FFFFFF;
+  --card-container-color: #FFF;
+
+  --jplt-color: #EB03FF;
 
   /*========== Font and typography ==========*/
   --body-font: 'Poppins', sans-serif;
   --normal-font-size: 1rem;
   --small-font-size: .75rem;
-  --smaller-font-size: .75rem;
+  --smaller-font-size: .25rem;
 
   /*========== Font weight ==========*/
   --font-thin: 100;
@@ -32,7 +36,21 @@
   /*========== z index ==========*/
   --z-fixed: 100;
 }
-
+/*========== Dark theme ==========*/
+.dark-theme-var{
+  --title-color: #fefeff;
+  --first-color: #6923D0;
+  --first-color-light: #363638;
+  --second-color-light: #605F5F;
+  --text-color: #bebec0;
+  --text-color-light: #A5A1AA;
+  --body-color: #161618;
+  --body-color-nav: #1f1f21;
+  --container-color: #FFFFFF;
+  --card-container-color: #1f1f21;
+  
+  --jplt-color: #8e099a;
+}
 @media screen and (min-width: 1024px) {
   :root {
     --normal-font-size: 1rem;
@@ -74,7 +92,7 @@ img {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--container-color);
+  background-color: var(--body-color-nav);
   box-shadow: 0 1px 0 rgba(22, 8, 43, 0.1);
   padding: 0 1rem;
   z-index: var(--z-fixed);
@@ -121,6 +139,30 @@ img {
   color: var(--text-color);
 }
 
+.theme-toggle{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.5rem;
+  width: 4.2rem;
+  cursor: pointer;
+  border-radius: .4rem;
+  background: #f0efef;
+}
+.theme-toggle i{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle i.active{
+  background: var(--first-color);
+  color: var(--body-color);
+  border-radius: .4rem;
+}
 .header-icon, 
 .header-toggle {
   font-size: 1.2rem;
@@ -138,7 +180,7 @@ img {
   left: -100%;
   height: 100vh;
   padding: 1rem 1rem 0;
-  background-color: var(--container-color);
+  background-color: var(--body-color-nav);
   box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
   z-index: var(--z-fixed);
   transition: .4s;
@@ -364,13 +406,13 @@ img {
 .card-container {
   height: 100vh;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .card {
-  background-color: var(--container-color);
+  background-color: var( --card-container-color);
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   margin: 3%;
@@ -418,6 +460,9 @@ p {
   padding: 0;
   justify-content: center;
   align-items: center;
+}
+.icon{
+  font-size: 1.5rem;
 }
 
 .card a {
