@@ -1,13 +1,13 @@
 
 .profile-section {
-    width: 80%;
-    max-width: 900px;
-    background-color: var(--container-color);
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px auto;
-    color: var(--text-color);
+  width: 80%;
+  max-width: 900px;
+  background-color: var(--card-container-color);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  color: var(--text-color);
 }
 .profile-header {
     display: flex;
