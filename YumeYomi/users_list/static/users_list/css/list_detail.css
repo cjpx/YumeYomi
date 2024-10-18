@@ -4,7 +4,7 @@
 
 .word-container {
   width: 60%;
-  background: #fff;
+  background: var(--card-container-color);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -107,7 +107,7 @@ hr {
 }
 
 .body-info span strong {
-  color: #000;
+  color: var(--text-color);
 }
 
 .word-footer {
@@ -126,6 +126,7 @@ hr {
   border: none;
   align-items: center;
   display: flex;
+  color: var( --text-color-light);
 }
 .footer-interaction #like-button:hover{
   cursor: pointer;
@@ -144,7 +145,7 @@ ul{
 
 ul .word-list{
   width: 60%;
-  background: #fff;
+  background: var(--card-container-color);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   list-style-type: none;
@@ -152,7 +153,7 @@ ul .word-list{
 }
 ul .word-list a{
   text-decoration: none;
-  color: inherit;
+  color: var(--text-color-light);
 }
 .list-top-elements{
   display: flex;
@@ -228,7 +229,7 @@ a .bck-lists{
 .tag{
   padding: 3px 10px 3px 10px;
   border-radius: 7px;
-  color: #000;
+ 
   font-size: 0.7rem;
   width: auto;
   height: 20px;
@@ -257,7 +258,7 @@ a .bck-lists{
 }
 
 .tag-jlpt-n1, .tag-jlpt-n2, .tag-jlpt-n3, .tag-jlpt-n4, .tag-jlpt-n5{
-  background-color: #EB03FF;
+  background-color: var(--jplt-color);
 }
 
 
