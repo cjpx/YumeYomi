@@ -4,11 +4,11 @@
 <div class="random-container">
     <div class="container-content">
         {% if character_display %}
-            <h1>{{ character_display }}</h1>
+            <h1 class="character">{{ character_display }}</h1>
             
             {% if request.session.selected_set == 'radical' %}
             <div class="card-display say-text">
-                <p><span>{{ random_reading }}</span></p>
+                <p class="character"><span>{{ random_reading }}</span></p>
                 <div class="play-text">
                   <button>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20">
@@ -58,14 +58,11 @@
             <label for="radical">Radical</label>
         </div>
     </form>
-    <p id="selected-message">Selected set: {{ request.session.selected_set }}</p>
 </div>
 
 <script>
     document.querySelectorAll('input[name="character_set"]').forEach((radio) => {
         radio.addEventListener('change', () => {
-            const selectedSet = document.querySelector('input[name="character_set"]:checked').value;
-            document.getElementById('selected-message').innerText = `Selected set: ${selectedSet}`;
             document.getElementById('character-form').submit();
         });
     });
