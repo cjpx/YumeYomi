@@ -32,6 +32,28 @@
   --font-semi-bold: 600;
 }
 
+/*========== Dark theme ==========*/
+.dark-theme-var{
+  --first-color: #6923D0;
+  --first-color-light: #363638;
+  --title-color: #d2c3f1;
+  --text-color: #bebec0;
+  --text-color-light: #A5A1AA;
+  --body-color: #161618;
+  --body-color-nav: #1f1f21;
+  --container-color: #FFFFFF;
+  --card-container-color: #1f1f21;
+}
+
+/* Example classes for different appearances */
+.appearance-light svg {
+  fill: var(--text-color); /* Light appearance color */
+}
+
+.appearance-dark svg {
+  fill: var(--text-color); /* Dark appearance color */
+}
+
 /* ========== Styling main head elements ========== */
 .xmain-head {
   width: 100%;
@@ -187,9 +209,14 @@
 #kanji-container{
   height: 100%;
   width: 100%;
-  background: #F0F0F0;
+  background: var(--card-container-color);
   margin: 2px auto;
+  border: none;
+  align-items: center;
+  justify-content: center;
 }
+
+
 
 .container-controls{
   align-items: center;
@@ -332,6 +359,7 @@ tr td div.display-kana button {
   background: none;
   border: none;
   box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.45);
+  background-color: var(--card-container-color);
 }
 
 tr td div.display-kana button:hover {
@@ -347,7 +375,7 @@ tr td div.display-kana button:hover {
   font-size: 20px;
   font-family: "Zen Maru Gothic", serif;
   font-weight: 500;
-  color: #000000;
+  color: var(--text-color);
 }
 
 .display-romanji {
