@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     div.setAttribute('data-character-name', character.name);
                     div.innerHTML = `
                         <h1>${character.name}</h1>
-                        <p>${strokeCount !== null ? (strokeCount === 1 ? '1 Stroke' : `${strokeCount} Strokes`) : 'N/A'}</p>
+                        <p>${strokeCount !== null ? (strokeCount === 1 ? '1 stroke' : `${strokeCount} strokes`) : 'N/A'}</p>
                         <p>${character.meaning}</p>
                     `;
                     characterList.appendChild(div);
