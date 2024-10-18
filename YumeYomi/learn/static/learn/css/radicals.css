@@ -1,6 +1,8 @@
+html, body {
+    overflow-x: hidden; /* Hides horizontal scrollbar */
+}
 
-
-.container {
+.radical-card-container {
     max-width: 900px; /* Limiting container width */
     justify-content: center;
     align-items: center;
@@ -9,6 +11,10 @@ h1 {
     font-size: 2.5rem; /* Larger heading font size */
     color: #333; /* Dark text color */
 }
+.table{
+    width: 100%;
+}
+
 table {
     width: 100%;
     margin-top: 1rem; /* Top margin for the table */
@@ -21,6 +27,51 @@ th {
     background-color: #9f9f9f; /* Blue background for table header */
     color: #fff; /* White text color */
 }
-tbody tr:hover {
+.tbody-rad tr:hover {
     background-color: #f5f5f5; /* Light gray background on hover */
+}
+
+/* Mobile Devices */
+@media only screen and (max-width: 707px) {
+    .radical-card-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 0.7rem;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile devices */
+    }
+
+    th{
+        padding: 0.4rem;
+        margin: 0;
+    }
+    
+    .table, .table-bordered {
+        width: 100%;
+        font-size: 0.7rem;
+    }
+}
+
+/* Tablet Devices */
+@media only screen and (min-width: 708px) and (max-width: 1024px) {
+    .radical-card-container {
+        width: 100%;
+        margin: 0;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+    }
+    
+    .table, .table-bordered {
+        width: 100%;
+        font-size: 1rem;
+    }
 }
