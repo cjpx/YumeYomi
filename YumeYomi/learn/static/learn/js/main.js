@@ -15,6 +15,28 @@ const showMenu = (headerToggle, navbarId) =>{
 }
 showMenu('header-toggle','navbar')
 
+/*==================== THEME CHANGE ====================*/
+const themeToggler = document.querySelector(".theme-toggle");
+
+// Check localStorage for theme preference on page load
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add("dark-theme-var");
+    themeToggler.querySelector('i.sun-icon').classList.remove('active');
+    themeToggler.querySelector('i.moon-icon').classList.add('active');
+}
+
+themeToggler.addEventListener('click', () => {
+    document.body.classList.toggle("dark-theme-var");
+
+    themeToggler.querySelector('i.sun-icon').classList.toggle('active');
+    themeToggler.querySelector('i.moon-icon').classList.toggle('active');
+
+    // Save the theme preference
+    const isDarkTheme = document.body.classList.contains("dark-theme-var");
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+});
+
+
 /*==================== LINK ACTIVE ====================*/
 const linkColor = document.querySelectorAll('.nav-link')
 
