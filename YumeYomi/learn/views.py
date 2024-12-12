@@ -12,23 +12,25 @@ import io
 
 
 def fetch_characters(request):
-    selected_radicals = request.GET.getlist('radicals[]')  # Get list of selected radicals' IDs
+    selected_radicals = request.GET.getlist('radicals[]')
     if not selected_radicals:
         return JsonResponse({'characters': []})
 
     try:
-        radical_ids = [int(id) for id in selected_radicals]
+        radical_ids = [int(id) for id in selected_radicals if id.isdigit()]
+        if not radical_ids:
+            return JsonResponse({'characters': []})
+
         radicals = Radical.objects.filter(radical_id__in=radical_ids)
         characters = Character.objects.filter(radicals__in=radicals).distinct()
-        # Include 'id' in the character data
-        character_data = list(characters.values('id', 'name', 'meaning', 'readings'))
+        character_data = list(characters.values('name', 'meaning', 'readings'))
         return JsonResponse({'characters': character_data})
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
     
 
-def character_detail(request, pk):
-    character = get_object_or_404(Character, pk=pk)
+def character_detail(request, name):
+    character = get_object_or_404(Character, name=name)
     return render(request, 'learn/character_detail.html', {
         'character': character
     })
