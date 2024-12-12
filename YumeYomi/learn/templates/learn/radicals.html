@@ -1,7 +1,7 @@
 {% extends "learn/base.html" %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="radical-card-container mt-5">
     <h1>Radicals</h1>
     <p>In Japanese writing, radicals refer to the basic components or building blocks of kanji characters. Kanji, which are adopted Chinese characters used in Japanese writing, are composed of various radicals. These radicals often give hints about the meaning or pronunciation of a kanji character.
 
@@ -20,7 +20,7 @@
                     <th>Radical Stroke Count</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="tbody-rad">
                 {% for radical in radicals %}
                 <tr>
                     <td>{{ radical.radical_id }}</td>
