@@ -35,7 +35,7 @@
                     <p class="like-count" id="like-count-{{ list.id }}">{{ list.likes }}</p>
                 </div>
                 <div class="user">
-                    <a href="{% url 'profile' %}">
+                    <a href="{% url 'profile' list.author.username %}">
                         <img src="{{ list.author.profile.image.url }}" alt="img profile" class="profile-img">
                     </a>
                     <p>{{ list.author }}</p>
