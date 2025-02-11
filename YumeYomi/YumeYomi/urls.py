@@ -20,11 +20,6 @@ urlpatterns = [
     path('katakana/', RedirectView.as_view(url='/カタカナ/')),
     path('カタカナ/', kana_views.katakana, name='katakana'),
 
-    path("register/", user_views.register, name="register"),
-    path("profile/", user_views.profile, name="profile"),
-    path("login/", auth_views.LoginView.as_view(template_name='users/login.html'), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(template_name='users/logout.html'), name="logout"),
-
     #--------- users list views ---------
     path('lists/', users_list_view.list_index, name='list_index'),
     path('list/<int:pk>/', users_list_view.list_detail, name='list_detail'),
@@ -41,6 +36,13 @@ urlpatterns = [
     path('random/', word_guess_view.random_word, name='random'),
     
     path("", include("learn.urls")),
+
+    path('<str:username>/', user_views.profile, name='profile'),  # other user's profile
+    path("register/", user_views.register, name="register"),
+    #path('profile/', user_views.profile, name='profile'),  # current user profile
+    path("login/", auth_views.LoginView.as_view(template_name='users/login.html'), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(template_name='users/logout.html'), name="logout"),
+
 ]
 
 if settings.DEBUG:
