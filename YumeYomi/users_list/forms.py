@@ -4,7 +4,7 @@ from .models import Word, WordList, Tag
 class WordListForm(forms.ModelForm):
     class Meta:
         model = WordList
-        fields = ['title', 'description', 'date_posted']
+        fields = ['title', 'description']
     
 
 class WordForm(forms.ModelForm):
