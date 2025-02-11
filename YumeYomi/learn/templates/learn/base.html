@@ -36,7 +36,7 @@
     <header class="header">
         <div class="header-container">
             {% if request.user.is_authenticated %}
-            <a href="{% url 'profile' %}" class="header-img profile">
+            <a href="{% url 'profile' user.username %}" class="header-img profile">
                 <img src="{{ user.profile.image.url }}" class="header-img profile" alt="">
             </a>
             
