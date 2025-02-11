@@ -5,30 +5,23 @@
     <h1>{{ form.instance.pk|yesno:"Edit,Create" }} {{ model_name }}</h1>
     <form id="edit-form" method="post">
       {% csrf_token %}
-      <label for="id_kanji">Word:</label>
-      {{ form.kanji }}
-      <label for="id_kana">Kana:</label>
-      {{ form.kana }}
-      <label for="id_romanji">Romanji:</label>
-      {{ form.romanji }}
-      <label for="id_meaning">Meaning:</label>
-      {{ form.meaning }}
-      <label for="id_tags">Tags</label>
-      {{ form.tags }}
-      <label for="id_usage_example">In a sentence</label>
-      {{ form.usage_example }}
-      <label for="id_translation">Translation</label>
-      {{ form.translation }}
+  
+      <label for="{{ form.title.id_for_label }}">Title:</label>
+      <input type="text" name="title" id="id_title" value="{{ form.title.value|default_if_none:'' }}">
+  
+      <label for="{{ form.description.id_for_label }}">Description:</label>
+      <textarea name="description" id="id_description">{{ form.description.value|default_if_none:'' }}</textarea>
+  
       <button type="submit" id="save">Save</button>
-    </form>
+  </form>
+  
     <a href="{% url 'list_index' %}">
       <button class="bck-lists">Back to Lists</button>
     </a>
   </div>
 
   <style>
-
-  .form-content {
+    .form-content {
       background-color: #fefefe;
       margin: 5% auto; /* 15% from the top and centered */
       padding: 20px;
@@ -36,38 +29,42 @@
       width: 80%; /* Could be more or less, depending on screen size */
       max-width: 600px; /* Max width for modal */
       position: relative;
-  }
+    }
 
-  /* Form styling */
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+    /* Form styling */
+    form {
+      display: flex;
+      flex-direction: column;
+    }
 
-  label {
-    margin-top: 10px;
-  }
+    label {
+      margin-top: 10px;
+    }
 
-  input[type="text"],
-  textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
 
-  button[id="save"] {
-    color: #000;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
- 
+    button[id="save"] {
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button[id="save"]:hover {
+      background-color: aqua;
+      cursor: pointer;
+      color: #000;
+    }
   </style>
 
 {% endblock %}
+
