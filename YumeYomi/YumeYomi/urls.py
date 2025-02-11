@@ -25,6 +25,7 @@ urlpatterns = [
     path("login/", auth_views.LoginView.as_view(template_name='users/login.html'), name="login"),
     path("logout/", auth_views.LogoutView.as_view(template_name='users/logout.html'), name="logout"),
 
+    #--------- users list views ---------
     path('lists/', users_list_view.list_index, name='list_index'),
     path('list/<int:pk>/', users_list_view.list_detail, name='list_detail'),
     path('list/new/', users_list_view.create_list, name='create_list'),
@@ -35,6 +36,7 @@ urlpatterns = [
     path('unlike/<int:pk>/', users_list_view.unlike_word_list, name='unlike_word_list'),
     path('add_tag/', users_list_view.add_tag, name='add_tag'),
     path('word/<int:word_id>/', users_list_view.word_detail, name='word_detail'),
+    path('delete_list/<int:pk>/', users_list_view.delete_list, name='delete_list'),
 
     path('random/', word_guess_view.random_word, name='random'),
     
