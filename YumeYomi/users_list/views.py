@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.utils.timezone import now
 
 from .models import WordList,  Word, Like, Tag
 from .forms import WordListForm, WordForm
@@ -28,15 +29,33 @@ def list_detail(request, pk):
 @login_required
 def create_list(request):
     if request.method == 'POST':
+        print("POST Data:", request.POST)  # Debugging
         form = WordListForm(request.POST)
         if form.is_valid():
+            print("Form is valid!")  # Debugging
             word_list = form.save(commit=False)
             word_list.author = request.user
+            word_list.date_posted = now()
             word_list.save()
             return redirect('list_index')
+        else:
+            print("Form errors:", form.errors)  # Debugging
     else:
         form = WordListForm()
+
     return render(request, 'users_list/form.html', {'form': form})
+@login_required
+def delete_list(request, pk):
+    #get world list data
+    word_list = get_object_or_404(WordList, pk=pk)
+
+    if word_list.author == request.user:
+        word_list.delete()
+        return redirect("list_index")
+    else:
+        return HttpResponse("Not autorize to delete this list")
+    
+
 
 @login_required
 def add_word(request, list_pk):
