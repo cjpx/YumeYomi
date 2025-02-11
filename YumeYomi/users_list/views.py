@@ -43,7 +43,7 @@ def create_list(request):
     else:
         form = WordListForm()
 
-    return render(request, 'users_list/form.html', {'form': form})
+    return render(request, 'users_list/word_list_form.html', {'form': form})
 @login_required
 def delete_list(request, pk):
     #get world list data
