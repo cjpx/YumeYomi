@@ -4,11 +4,10 @@ from .import views
 from django.http import HttpResponse, JsonResponse
 from .models import Post, Radical, Character, CharacterEdit
 from django.contrib.auth.decorators import login_required
-from .forms import CharacterEditForm
+#from .forms import CharacterEditForm
 from django.db.models import Q
 from gtts import gTTS
 import io
-
 
 
 def fetch_characters(request):
@@ -53,12 +52,14 @@ def radical_detail(request, radical):
     radical_obj = get_object_or_404(Radical, radical=radical)
     readings_hiragana = radical_obj.reading_hiragana.split(", ")
     readings_romanji = radical_obj.reading_romanji.split(", ")
+    other_forms = radical_obj.other_forms.split(", ")
 
     readings = zip(readings_hiragana, readings_romanji)
 
     context = {
         'radical' : radical_obj,
-        'readings': readings
+        'readings': readings,
+        'other_forms': other_forms
     }
 
     return render(request, 'learn/radical_detail.html', context)
