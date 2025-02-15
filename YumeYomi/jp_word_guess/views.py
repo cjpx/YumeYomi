@@ -123,7 +123,7 @@ def random_word(request):
             radical_char_meaning = ''
         elif selected_set == 'radical':
             # Fetch a random radical instance
-            radical = Radicals.objects.order_by('?').first()
+            radical = Radical.objects.order_by('?').first()
 
             # Split readings into lists
             readings_hiragana = radical.reading_hiragana.split(",")
