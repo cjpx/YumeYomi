@@ -21,6 +21,7 @@ class Radical(models.Model):
     radical_stroke_count = models.PositiveIntegerField(verbose_name="Stroke Count")
     reading_hiragana = models.CharField(max_length=100, blank=False, default='', verbose_name="Hiragana Reading")
     reading_romanji = models.CharField(max_length=100, blank=False, default='', verbose_name="Romanji Reading")
+    important = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Radical"
