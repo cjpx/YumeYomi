@@ -1,0 +1,8 @@
+[
+    { "radical_id": 1, "radical": "一", "other_forms": "", "radical_meaning": "one; a horizontal stroke", "radical_stroke_count": 1, "reading_hiragana": "いち", "reading_romanji":"ichi", "important": true},
+    { "radical_id": 2, "radical": "丨", "other_forms": "｜", "radical_meaning": "a vertical stroke", "radical_stroke_count": 1, "reading_hiragana": "ぼう, たてぼう", "reading_romanji":"bou, tatebou", "important": true},
+    { "radical_id": 3, "radical": "丶", "other_forms": "", "radical_meaning": "a dot", "radical_stroke_count": 1, "reading_hiragana": "てん, ちょぼ, ちゅ, ちゅてん", "reading_romanji":"ten, chobo, chu, chuten", "important": true},
+    { "radical_id": 4, "radical": "丿", "other_forms": "ノ", "radical_meaning": "a stroke curved to the left", "radical_stroke_count": 1, "reading_hiragana": "の, のかんむり, はらいぼう", "reading_romanji":"no, nokanmuri, haraibou", "important": true},
+    { "radical_id": 5, "radical": "丿", "other_forms": "乚, ⺄, 乛", "radical_meaning": "a bend stroke; the second of celestial stems", "radical_stroke_count": 1, "reading_hiragana": "おつ, おつにょう, つりばり", "reading_romanji":"otsu, otsunyou, tsuribari", "important": false}
+]
+
