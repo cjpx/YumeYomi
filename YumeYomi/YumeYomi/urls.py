@@ -34,14 +34,17 @@ urlpatterns = [
     path('delete_list/<int:pk>/', users_list_view.delete_list, name='delete_list'),
 
     path('random/', word_guess_view.random_word, name='random'),
+
+    
     
     path("", include("learn.urls")),
+    path("login/", auth_views.LoginView.as_view(template_name='users/login.html'), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(template_name='users/logout.html'), name="logout"),
 
     path('<str:username>/', user_views.profile, name='profile'),  # other user's profile
     path("register/", user_views.register, name="register"),
     #path('profile/', user_views.profile, name='profile'),  # current user profile
-    path("login/", auth_views.LoginView.as_view(template_name='users/login.html'), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(template_name='users/logout.html'), name="logout"),
+    
 
 ]
 
