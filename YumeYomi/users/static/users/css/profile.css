@@ -13,6 +13,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    justify-content: center;
 }
 .profile-avatar {
     width: 100px;
@@ -21,11 +22,27 @@
     margin-right: 20px;
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 .profile-details {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
+.update-picture{
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+}
+.update-picture:hover{
+  cursor: pointer;
+
+}
+
 
 .profile-username {
     margin: 0;
