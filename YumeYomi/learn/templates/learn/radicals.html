@@ -17,6 +17,7 @@
                     <th>Radical</th>
                     <th>Other Forms</th>
                     <th>Radical Meaning</th>
+                    <th>Importance</th>
                     <th>Radical Stroke Count</th>
                 </tr>
             </thead>
@@ -27,6 +28,11 @@
                     <td><a href="{% url 'radical_detail' radical.radical %}" target="_blank" rel="noopener noreferrer">{{ radical.radical }}</a></td>
                     <td>{{ radical.other_forms }}</td>
                     <td>{{ radical.radical_meaning }}</td>
+                    <td>
+                        {% if radical.important %}
+                            <p>Important</p>
+                        {% endif %}
+                    </td>
                     <td>
                         {% if radical.radical_stroke_count > 1 %}
                             {{ radical.radical_stroke_count }} strokes
