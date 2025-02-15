@@ -75,7 +75,7 @@ def add_word(request, list_pk):
             return redirect('list_detail', pk=list_pk)
     else:
         form = WordForm()
-    return render(request, 'users_list/form.html', {'form': form})
+    return render(request, 'users_list/word_form.html', {'form': form})
 
 @login_required
 def add_tag(request):
