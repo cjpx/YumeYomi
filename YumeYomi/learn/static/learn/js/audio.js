@@ -4,7 +4,7 @@ $(document).ready(function() {
         var character;
 
         // Check if there's an SVG inside the .display-kana
-        var svgInsideDisplayKana = $(this).closest('.say-text').find('svg').length > 0;
+        var svgInsideDisplayKana = $(this).closest('.say-text').find('i').length > 0;
 
         if (svgInsideDisplayKana) {
             // If there's an SVG inside .display-kana, get the character associated with the SVG
