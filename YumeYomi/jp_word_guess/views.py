@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from learn .models import Radicals
+from learn .models import Radical
 import random
 
 # Dictionary mapping Hiragana characters to their romanji equivalents
@@ -76,10 +76,10 @@ def random_word(request):
             selected_set = request.POST.get('character_set')
             request.session['selected_set'] = selected_set
             # Reset session values for new character set
-            request.session['character'] = None
-            request.session['correct_romanji'] = None
-            request.session['random_reading'] = None
-            request.session['radical_meaning'] = None
+            request.session['character'] = ''
+            request.session['correct_romanji'] = ''
+            request.session['random_reading'] = ''
+            request.session['radical_meaning'] = ''
         else:
             selected_set = request.session.get('selected_set')
 
